@@ -1,3 +1,13 @@
+h1 {
+   text-align: center;
+}
+
 #nav-search {
     float: left;
+    margin: 10px;
+}
+.btn {
+    width: 100%;
+    background-color: blue;
+    color: white;
 }

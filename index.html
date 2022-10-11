@@ -10,34 +10,31 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <div class="text-bg-secondary p-3">
-        <header>
-            Weather Dashboard
-        </header>
-    </div>
+    <header class="text-bg-secondary p-3">
+        <h1>Weather Dashboard</h1>
+    </header>
+
     <main>
 
         <section id="nav-search">
-            <nav class="navbar" style="background-color: #e3f2fd;">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Active</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link disabled">Disabled</a>
-                    </li>
-                  </ul>
-            </nav>
+            <div class="column">
+                <h3>Search for a city:</h3>
+                <div id="search-city" class="mb-2">
+                    <input class="form-control me-2" type="search" placeholder="Philadelphia" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </div>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+              </div>
         </section>
+
         <section>
             <div class="row">
-                <div class="col-12 col-lg-9 mb-3">
+                <div class="col-12 col-lg-9 mb-3 mt-3">
                 <div class="card">
                     <div class="card-body">
                     <p class="card-text">Current day weather report from API placeholder</p>
