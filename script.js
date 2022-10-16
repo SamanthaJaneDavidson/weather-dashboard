@@ -1,28 +1,40 @@
 var currentWeatherReport = document.querySelector(`#current-weather-report`);
 var fiveDayreport = document.querySelector(`#five-day-report`);
-var cityState = document.querySelector("#city-state");
+var city = document.querySelector("#city");
 var searchButton = document.querySelector("#search")
 
-//Search for city and state 
-var searchLocation = function (event) {
+//Search for city
+var searchCity = function (event) {
     event.preventdefault();
 
-    var location = cityState.value();
+    city.value();
 
-    if (location) {
-        getCurrentWeather(location);
+    if (city) {
+        getLongLat(city);
 
         currentWeatherReport.textContent = ` `;
+
     } else {
-        alert(`Please enter a valid city and state.`);
+        alert(`Please enter a valid city and.`);
     }
 };
 
-//Event listener for search button 
-searchButton.addEventListener(`click`, () => {
-    getCurrentWeather();
-    getFiveDayWeather();
-});
+//Event listener for search button to kick city to long/lat conversion 
+searchButton.addEventListener(`click`, getLongLat);
+
+//City to long/lat geocoding converstion 
+function getLongLat(city){
+    var geoCodingUrl = `https://api.openweathermap.org/data/2.5/weather?q=` + city + `&appid=d97fe2285b7bc123de0716fce9e4ac7a`;
+
+    fetch(geoCodingUrl)
+        .then(function (response) {
+            response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+
+}
 
 //Get current weather forcast
 var getCurrentWeather = function (currentWeather) {
@@ -69,10 +81,6 @@ var displayCurrentWeather = function (weather, city) {
 }
 
 
-
-
-// //Geocoding API call - do this call first 
-// var geoCoding = "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={api key}"
 
 // //API call for currernt weather 
 // // var currentRequestUrl = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api key}"
