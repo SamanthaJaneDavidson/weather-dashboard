@@ -1,8 +1,10 @@
+var APIKey = "d97fe2285b7bc123de0716fce9e4ac7a"
 var currentWeatherReport = document.querySelector(`#current-weather-report`);
 var fiveDayreport = document.querySelector(`#five-day-report`);
 var city = document.querySelector("#city");
 var searchButton = document.querySelector("#search")
 var citySearches = document.querySelector("#city-links")
+// var city;
 
 //Search for city
 var searchCity = function (event) {
@@ -31,7 +33,7 @@ function storeCitySearches(){
 }
 
 
-//Display city search links 
+// //Display city search links 
 function renderCitySearches () {
     var savedSearches = JSON.parse(localStorage.getItem("storedCities"));
 
@@ -109,11 +111,8 @@ var displayCurrentForcast = function (city) {
         }
     };
 
+
 //Get 5 day forecast 
 
-
-// //API call for currernt weather 
-// // var currentRequestUrl = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api key}"
-
 // //API call for 5 day forcast 
-// var fiveDayRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api key}";
+// var fiveDayRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid={api key}";
