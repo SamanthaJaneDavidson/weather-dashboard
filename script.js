@@ -1,36 +1,32 @@
 var APIKey = "d97fe2285b7bc123de0716fce9e4ac7a"
 var currentWeatherReport = document.querySelector(`#current-weather-report`);
 var fiveDayreport = document.querySelector(`#five-day-report`);
-var city = document.querySelector("#city");
+var cityInput = document.querySelector("#city");
 var searchButton = document.querySelector("#search")
 var citySearches = document.querySelector("#city-links")
 // var city;
 
 //Search for city
 var searchCity = function (event) {
-    event.preventdefault();
 
-    var city = city.value.trim();
+    var city = cityInput.value.trim();
+    console.log(city)
 
     if (city) {
         getLongLat(city);
-
+        var storedCities = {
+            city: city
+        };
+        cities.push(storedCities)
+        localStorage.setItem("cities", JSON.stringify(cities))
     } else {
         alert(`Please enter a valid city`);
     }
+    
 };
-
 
 //Save city search links 
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
-
-function storeCitySearches(){
-    var storedCities = {
-        city: city.value.trim()
-    };
-    cities.push(storedCities)
-    localStorage.setItem("cities", JSON.stringify(cities))
-}
 
 
 // //Display city search links 
@@ -43,13 +39,12 @@ function renderCitySearches () {
         return;
     }
 }
+    renderCitySearches();
 
 // Event listener for search button to save scores and go to geo conversion 
 searchButton.addEventListener(`click`, function (event) {
     event.preventDefault();
-    storeCitySearches();
-    renderCitySearches();
-    getLongLat();
+    searchCity();
 });
 
 
@@ -59,33 +54,33 @@ function getLongLat(city){
 
     fetch(geoCodingUrl)
         .then(function (response) {
-            response.json();
+            return response.json();
         })
         .then(function (data) {
             console.log(data);
+            var lon = data.coord.lon
+            var lat = data.coord.lat
+            getCurrentWeather(lat, lon);
         })
-
-        //not sure how to define lon and lat here
-
-       getCurrentWeather();
 }
 
 
 //Get current weather forecast
-var getCurrentWeather = function () {
-    var currentRequestUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon +" &appid=d97fe2285b7bc123de0716fce9e4ac7a";
+var getCurrentWeather = function (lat, lon) {
+    var currentRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=d97fe2285b7bc123de0716fce9e4ac7a";
 
     fetch(currentRequestUrl)
         .then(function (response) {
-            response.json();
+            return response.json();
     }) 
         .then(function (data) {
             console.log(data);
+            displayCurrentForcast(data.list);
         })
     };
     
 //Display current weather forecast
-var displayCurrentForcast = function (city) {
+var displayCurrentForcast = function (data) {
     for(var i = 0; i < data.length; i++) {
 
         var cityName = document.createElement(`h2`);
@@ -96,14 +91,14 @@ var displayCurrentForcast = function (city) {
         var currentHumidity  = document.createElement(`p`);
 
         cityName.textContent = city
-        currentDate = moment().format (`L`);
+        // currentDate = moment().format (`L`);
         weatherIcon = data[i].weather.icon;
         currentTemp = data[i].main.temp;
         currentWind = data[i].wind.speed;
         currentHumidity = data[i].main.humidity;
 
         currentWeatherReport.append(cityName);
-        currentWeatherReport.append(currentDate);
+        // currentWeatherReport.append(currentDate);
         currentWeatherReport.append(weatherIcon);
         currentWeatherReport.append(currentTemp);
         currentWeatherReport.append(currentWind);
@@ -114,5 +109,6 @@ var displayCurrentForcast = function (city) {
 
 //Get 5 day forecast 
 
-// //API call for 5 day forcast 
-// var fiveDayRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid={api key}";
+// var fiveDayRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "";
+
+//use dt_txt for date
