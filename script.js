@@ -6,6 +6,11 @@ var searchButton = document.querySelector("#search")
 var citySearches = document.querySelector("#city-links")
 // var city;
 
+
+//Save city search links 
+var cities = JSON.parse(localStorage.getItem("cities")) || [];
+
+
 //Search for city
 var searchCity = function (event) {
 
@@ -17,6 +22,7 @@ var searchCity = function (event) {
         var storedCities = {
             city: city
         };
+
         cities.push(storedCities)
         localStorage.setItem("cities", JSON.stringify(cities))
     } else {
@@ -25,13 +31,10 @@ var searchCity = function (event) {
     
 };
 
-//Save city search links 
-var cities = JSON.parse(localStorage.getItem("cities")) || [];
-
-
 // //Display city search links 
 function renderCitySearches () {
-    var savedSearches = JSON.parse(localStorage.getItem("storedCities"));
+    var savedSearches = JSON.parse(localStorage.getItem("cities"));
+    console.log(savedSearches);
 
     if(savedSearches !== null) {
         document.getElementById("city-links").innerHTML = savedSearches;
