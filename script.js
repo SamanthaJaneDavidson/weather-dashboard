@@ -3,8 +3,8 @@ var currentWeatherReport = document.querySelector(`#current-weather-report`);
 var fiveDayreport = document.querySelector(`#five-day-report`);
 var cityInput = document.querySelector("#city");
 var searchButton = document.querySelector("#search")
-var citySearches = document.querySelector("#city-links")
-// var city;
+var citySearchesEl = document.querySelector("#city-search-links")
+
 
 
 //Save city search links 
@@ -31,15 +31,23 @@ var searchCity = function (event) {
     
 };
 
+
 // //Display city search links 
 function renderCitySearches () {
     var savedSearches = JSON.parse(localStorage.getItem("cities"));
     console.log(savedSearches);
 
     if(savedSearches !== null) {
-        document.getElementById("city-links").innerHTML = savedSearches;
+        document.getElementById("city-search-links").innerHTML = savedSearches;
     } else {
         return;
+    }
+
+    for(var i = 0; i < 10; i++) {
+        console.log(savedSearches[i]);
+        var citySearchesEl = document.createElement("li");
+        citySearchesEl.setAttribute("href", savedSearches[i].html_url);
+        citySearchesEl.append(savedSearches);
     }
 }
     renderCitySearches();
