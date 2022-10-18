@@ -1,11 +1,10 @@
 var APIKey = "d97fe2285b7bc123de0716fce9e4ac7a"
 var currentWeatherReport = document.querySelector(`#current-weather-report`);
-var fiveDayreport = document.querySelector(`#five-day-report`);
+var forecastWeatherReport = document.querySelector(`#forecast-weather-report`);
 var cityInput = document.querySelector("#city");
 var searchButton = document.querySelector("#search")
 var citySearchesEl = document.querySelector("#city-search-links")
 var city = ``;
-
 
 //Search for city
 var searchCity = function (event) {
@@ -40,7 +39,7 @@ function renderCitySearches () {
     }
 
     citySearchesEl.innerHTML = ``;
-    
+
     for(var i = 0; i < 10; i++) {
         console.log(savedSearches[i]);
         var citySearchEl = document.createElement("li");
@@ -84,37 +83,60 @@ var getCurrentWeather = function (lat, lon) {
     }) 
         .then(function (data) {
             console.log(data);
-            displayCurrentForcast(data);
+            displayCurrentWeather(data);
         })
     };
     
 //Display current weather forecast
 
-var displayCurrentForcast = function (data) {
-    // for(var i = 0; i < data.length; i++) {
+var displayCurrentWeather = function (data) {
 
         var cityName = document.createElement(`h2`);
-        // var currentDate = document.createElement(`h2`);
+        var currentDate = document.createElement(`h2`);
         var weatherIcon = document.createElement(`h3`);
         var currentTemp = document.createElement(`li`);
         var currentWind = document.createElement(`li`);
         var currentHumidity  = document.createElement(`li`);
 
         cityName.textContent = city;
-        //currentDate = add momment date 
+        currentDate = data.currnet.dt; //will need to do date conversion
         weatherIcon = data.current.weather[0].icon; 
         currentTemp = data.current.temp;
         currentWind = data.current.wind_speed;
         currentHumidity = data.current.humidity;
 
         currentWeatherReport.append(cityName);
-        // currentWeatherReport.append(currentDate);
+        currentWeatherReport.append(currentDate);
         currentWeatherReport.append(weatherIcon);
         currentWeatherReport.append(currentTemp);
         currentWeatherReport.append(currentWind);
         currentWeatherReport.append(currentHumidity);
-        // }
     };
 
 
 //Get 5 day forecast 
+var displayForecast = function (data) {
+
+    for (var i = 0; i < 4; i++)
+
+    var cityName = document.createElement(`h2`);
+    var forecastDate = document.createElement(`h2`);
+    var forecastIcon = document.createElement(`h3`);
+    var forecastTemp = document.createElement(`li`);
+    var forecastWind = document.createElement(`li`);
+    var forecastHumidity  = document.createElement(`li`);
+
+    cityName.textContent = city;
+    currentDate = data.daily[i].dt; //need to do a date conversion 
+    forecastIcon = data.daily[i].weather[0].icon; 
+    forecastTemp = data.daily[i].temp;
+    forecastWind = data.daily[i].wind_speed;
+    forecastHumidity = data.daily[i].humidity;
+
+    forecastWeatherReport.append(cityName);
+    forecastWeatherReport.append(forecastDate);
+    forecastWeatherReport.append(forecastIcon);
+    forecastWeatherReport.append(forecastTemp);
+    forecastWeatherReport.append(forecastWind);
+    forecastWeatherReport.append(forecastHumidity);
+};
