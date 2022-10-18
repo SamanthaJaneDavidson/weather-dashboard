@@ -37,4 +37,5 @@ li {
 /* #forecast-weather-report {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 } */

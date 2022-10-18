@@ -46,7 +46,7 @@ function renderCitySearches () {
         // citySearchEl.setAttribute("href", ) 
         citySearchEl.textContent = savedSearches[i].city;
         citySearchesEl.append(citySearchEl);
-       
+
         //not sure how to make these into links to search again and also take out dups
     }
 }
@@ -145,25 +145,3 @@ var displayForecast = function (data) {
     forecastWeatherReport.append(forecastHumidity);
 };
 }
-
-
-// var day1Forecast = function (data) {
-
-//     var forecastDate = document.createElement(`h2`);
-//     var forecastIcon = document.createElement(`img`);
-//     var forecastTemp = document.createElement(`li`);
-//     var forecastWind = document.createElement(`li`);
-//     var forecastHumidity  = document.createElement(`li`);
-
-//     forecastDate = data.daily[0].dt; //need to do a date conversion 
-//     forecastIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png")
-//     forecastTemp.textContent = "Temperature: " + data.daily[0].temp.day;
-//     forecastWind.textContent = "Wind Speed: " + data.daily[0].wind_speed;
-//     forecastHumidity.textContent = "Humidity: " + data.daily[0].humidity;
-
-//     forecastWeatherReport.append(forecastDate);
-//     forecastWeatherReport.append(forecastIcon);
-//     forecastWeatherReport.append(forecastTemp);
-//     forecastWeatherReport.append(forecastWind);
-//     forecastWeatherReport.append(forecastHumidity);
-// };
