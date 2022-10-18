@@ -44,7 +44,6 @@ function renderCitySearches () {
         console.log(savedSearches[i]);
         var citySearchEl = document.createElement("li");
         citySearchEl.textContent = savedSearches[i].city;
-        // citySearchesEl.setAttribute("href", savedSearches[i].html_url);
         citySearchesEl.append(citySearchEl);
     }
 }
