@@ -42,7 +42,8 @@ function renderCitySearches () {
 
     for(var i = 0; i < 10; i++) {
         console.log(savedSearches[i]);
-        var citySearchEl = document.createElement("li");
+        var citySearchEl = document.createElement("a");
+        // citySearchEl.setAttribute("href", ) 
         citySearchEl.textContent = savedSearches[i].city;
         citySearchesEl.append(citySearchEl);
        
@@ -85,7 +86,7 @@ var getCurrentWeather = function (lat, lon) {
         .then(function (data) {
             console.log(data);
             displayCurrentWeather(data);
-            day1Forecast(data) 
+            day1Forecast(data) //change to full 5 day if possible 
         })
     };
     
@@ -113,7 +114,12 @@ var displayCurrentWeather = function (data) {
         currentWeatherReport.append(currentTemp);
         currentWeatherReport.append(currentWind);
         currentWeatherReport.append(currentHumidity);
+
+        var dateConversion = new Date(currentDate).toLocaleDateString("en-US");
+        console.log(dateConversion);
+
     };
+
 
 //Get 5 day forecast 
 // var displayForecast = function (data) {
@@ -150,7 +156,7 @@ var day1Forecast = function (data) {
 
     forecastDate = data.daily[0].dt; //need to do a date conversion 
     forecastIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png")
-    forecastTemp = data.daily[0].temp;
+    forecastTemp = data.daily[0].temp.day;
     forecastWind = data.daily[0].wind_speed;
     forecastHumidity = data.daily[0].humidity;
 
