@@ -95,18 +95,18 @@ var getCurrentWeather = function (lat, lon) {
 var displayCurrentWeather = function (data) {
 
         var cityName = document.createElement(`h2`);
-        var currentDate = document.createElement(`h2`);
+        var currentDate = document.createElement(`h4`);
         var weatherIcon = document.createElement(`img`);
         var currentTemp = document.createElement(`li`);
         var currentWind = document.createElement(`li`);
         var currentHumidity  = document.createElement(`li`);
 
         cityName.textContent = city;
-        currentDate = data.current.dt; //will need to do date conversion
+        currentDate.textContent = data.current.dt; //will need to do date conversion
         weatherIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png")
-        currentTemp = data.current.temp;
-        currentWind = data.current.wind_speed;
-        currentHumidity = data.current.humidity;
+        currentTemp.textContent = "Temperature: " + data.current.temp;
+        currentWind.textContent = "Wind Speed: " + data.current.wind_speed;
+        currentHumidity.textContent = "Humidity: " + data.current.humidity;
 
         currentWeatherReport.append(cityName);
         currentWeatherReport.append(currentDate);
@@ -127,16 +127,16 @@ var displayCurrentWeather = function (data) {
 //     for (var i = 0; i < 4; i++)
 
 //     var forecastDate = document.createElement(`h2`);
-//     var forecastIcon = document.createElement(`h3`);
+//     var forecastIcon = document.createElement(`img`);
 //     var forecastTemp = document.createElement(`li`);
 //     var forecastWind = document.createElement(`li`);
 //     var forecastHumidity  = document.createElement(`li`);
 
 //     currentDate = data.daily[i].dt; //need to do a date conversion 
 //     forecastIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.daily.weather[0].icon + ".png")
-//     forecastTemp = data.daily[i].temp;
-//     forecastWind = data.daily[i].wind_speed;
-//     forecastHumidity = data.daily[i].humidity;
+//     forecastTemp.textContent = "Temperature: " + data.daily[i].temp;
+//     forecastWind.textContent = "Wind Speed: " + data.daily[i].wind_speed;
+//     forecastHumidity.textContent = "Humidity: " + data.daily[i].humidity;
 
 //     forecastWeatherReport.append(forecastDate);
 //     forecastWeatherReport.append(forecastIcon);
@@ -156,9 +156,9 @@ var day1Forecast = function (data) {
 
     forecastDate = data.daily[0].dt; //need to do a date conversion 
     forecastIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png")
-    forecastTemp = data.daily[0].temp.day;
-    forecastWind = data.daily[0].wind_speed;
-    forecastHumidity = data.daily[0].humidity;
+    forecastTemp.textContent = "Temperature: " + data.daily[0].temp.day;
+    forecastWind.textContent = "Wind Speed: " + data.daily[0].wind_speed;
+    forecastHumidity.textContent = "Humidity: " + data.daily[0].humidity;
 
     forecastWeatherReport.append(forecastDate);
     forecastWeatherReport.append(forecastIcon);
