@@ -45,6 +45,8 @@ function renderCitySearches () {
         var citySearchEl = document.createElement("li");
         citySearchEl.textContent = savedSearches[i].city;
         citySearchesEl.append(citySearchEl);
+       
+        //not sure how to make these into links to search again and also take out dups
     }
 }
     renderCitySearches();
@@ -83,6 +85,7 @@ var getCurrentWeather = function (lat, lon) {
         .then(function (data) {
             console.log(data);
             displayCurrentWeather(data);
+            day1Forecast(data) 
         })
     };
     
@@ -92,14 +95,14 @@ var displayCurrentWeather = function (data) {
 
         var cityName = document.createElement(`h2`);
         var currentDate = document.createElement(`h2`);
-        var weatherIcon = document.createElement(`h3`);
+        var weatherIcon = document.createElement(`img`);
         var currentTemp = document.createElement(`li`);
         var currentWind = document.createElement(`li`);
         var currentHumidity  = document.createElement(`li`);
 
         cityName.textContent = city;
-        currentDate = data.currnet.dt; //will need to do date conversion
-        weatherIcon = data.current.weather[0].icon; 
+        currentDate = data.current.dt; //will need to do date conversion
+        weatherIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png")
         currentTemp = data.current.temp;
         currentWind = data.current.wind_speed;
         currentHumidity = data.current.humidity;
@@ -112,27 +115,45 @@ var displayCurrentWeather = function (data) {
         currentWeatherReport.append(currentHumidity);
     };
 
-
 //Get 5 day forecast 
-var displayForecast = function (data) {
+// var displayForecast = function (data) {
 
-    for (var i = 0; i < 4; i++)
+//     for (var i = 0; i < 4; i++)
 
-    var cityName = document.createElement(`h2`);
+//     var forecastDate = document.createElement(`h2`);
+//     var forecastIcon = document.createElement(`h3`);
+//     var forecastTemp = document.createElement(`li`);
+//     var forecastWind = document.createElement(`li`);
+//     var forecastHumidity  = document.createElement(`li`);
+
+//     currentDate = data.daily[i].dt; //need to do a date conversion 
+//     forecastIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.daily.weather[0].icon + ".png")
+//     forecastTemp = data.daily[i].temp;
+//     forecastWind = data.daily[i].wind_speed;
+//     forecastHumidity = data.daily[i].humidity;
+
+//     forecastWeatherReport.append(forecastDate);
+//     forecastWeatherReport.append(forecastIcon);
+//     forecastWeatherReport.append(forecastTemp);
+//     forecastWeatherReport.append(forecastWind);
+//     forecastWeatherReport.append(forecastHumidity);
+// };
+
+
+var day1Forecast = function (data) {
+
     var forecastDate = document.createElement(`h2`);
-    var forecastIcon = document.createElement(`h3`);
+    var forecastIcon = document.createElement(`img`);
     var forecastTemp = document.createElement(`li`);
     var forecastWind = document.createElement(`li`);
     var forecastHumidity  = document.createElement(`li`);
 
-    cityName.textContent = city;
-    currentDate = data.daily[i].dt; //need to do a date conversion 
-    forecastIcon = data.daily[i].weather[0].icon; 
-    forecastTemp = data.daily[i].temp;
-    forecastWind = data.daily[i].wind_speed;
-    forecastHumidity = data.daily[i].humidity;
+    forecastDate = data.daily[0].dt; //need to do a date conversion 
+    forecastIcon.setAttribute("src","https://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png")
+    forecastTemp = data.daily[0].temp;
+    forecastWind = data.daily[0].wind_speed;
+    forecastHumidity = data.daily[0].humidity;
 
-    forecastWeatherReport.append(cityName);
     forecastWeatherReport.append(forecastDate);
     forecastWeatherReport.append(forecastIcon);
     forecastWeatherReport.append(forecastTemp);
