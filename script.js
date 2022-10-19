@@ -16,13 +16,14 @@ var searchCity = function (event) {
         city = cityInput.value.trim();
     }
 
-    console.log(city)
-
     if (city) {
         getLongLat(city);
         var storedCities = {
             city: city
         };
+    } else {
+        alert(`Please enter a valid city`);
+    }
 
         var existing = false
         for(var i = 0; i < cities.length; i++ ){
@@ -36,9 +37,11 @@ var searchCity = function (event) {
         }
 
         localStorage.setItem("cities", JSON.stringify(cities))
-    } else {
-        alert(`Please enter a valid city`);
-    }
+
+        // } else {
+        //     alert(`Please enter a valid city`);
+        // }
+
     renderCitySearches()
 };
 

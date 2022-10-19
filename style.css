@@ -20,7 +20,7 @@ h1 {
     padding: 5px;
 }
 
-a {
+button {
     background-color: rgb(183, 179, 179);
     padding: 5px;
     border-radius: 5px;
@@ -38,4 +38,15 @@ li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+img {
+    width: 50px;
+}
+
+@media screen and (max-width: 767px)  {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
 }
