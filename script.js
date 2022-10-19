@@ -145,7 +145,7 @@ var displayForecast = function (data) {
 
     forecastWeatherReport.innerHTML = ``;
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 1; i < 6; i++) {
     
     var div = document.createElement('div');
     div.classList.add('card');

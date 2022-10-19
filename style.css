@@ -38,6 +38,7 @@ li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 5px;
 }
 
 img {
@@ -46,6 +47,10 @@ img {
 
 @media screen and (max-width: 767px)  {
     main {
+        display: flex;
+        flex-direction: column;
+    }
+    #forecast-weather-report {
         display: flex;
         flex-direction: column;
     }
