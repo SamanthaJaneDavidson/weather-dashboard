@@ -34,8 +34,8 @@ li {
     flex-direction: column;
 }
 
-/* #forecast-weather-report {
+#forecast-weather-report {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-} */
+}
